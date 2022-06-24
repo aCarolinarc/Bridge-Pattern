@@ -29,28 +29,22 @@ class Menu:
             4: "Google Chrome"
         }
 
-    def create_device(self):
-        print('***********************************')
-        print('1. crear una tv')
-        print('2. crear una radio')
-        optionmenu = int(input("Porfavor coloque el numero de las opciones"))
-        if optionmenu == 1:
-            self.create_device(1)
-        if optionmenu == 2:
-            self.create_device(2)
-
     def create_remote(self):
         print('***********************************')
         print('1. crear un control normal')
         print('2. crear un control avanzado')
         optionmenu = int(input("Porfavor coloque el numero de las opciones"))
         if optionmenu == 1:
+            #  device: Device
+
+            remote = Remote()
             self.create_device(1)
         if optionmenu == 2:
             self.create_device(2)
 
     def show_devices(self):
-        pass
+        for i in self.__device_list:
+            print()
 
     def show_remotes(self):
         pass
@@ -65,19 +59,24 @@ class Menu:
             radio = Radio(False, 100, self.radio_chanels)
             self.__device_list.append(radio)
             print("radio creada de forma exitosa")
+        if option == 3:
+            tv_smart = Smart(False, 100, self.smart_apps)
 
     def assign_device_to_remote(self):
         pass
 
     def create_device_menu(self):
         print('***********************************')
-        print('1. crear un control remoto')
-        print('2. crear un dispositivo')
+        print('1. crear una tv')
+        print('2. crear una radio')
+        print('3. crear tv smart')
         optionmenu = int(input("Porfavor coloque el numero de las opciones"))
         if optionmenu == 1:
-            self.create_remote()
+            self.create_device(1)
         if optionmenu == 2:
-            self.create_device()
+            self.create_device(2)
+        if optionmenu == 3:
+            self.create_device(3)
 
     def main_menu(self):
         option = 0
@@ -101,4 +100,3 @@ class Menu:
                 self.show_remotes()
             if option == 5:
                 self.assign_device_to_remote()
-
