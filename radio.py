@@ -8,6 +8,18 @@ class Radio(Device):
         self.__volume: int = 100
         self.__chanel_list: Dict[int: str] = {}
 
+    def is_enabled(self):
+        return self.__is_enabled
+
+    def enable(self):
+        self.__is_enabled = True
+
+    def disable(self):
+        self.__is_enabled = False
+
+    def get_channel(self, chanels: Dict[int: str]):
+        self.__chanel_list = chanels
+
     def set_volume(self, volume: int):
         self.__volume = volume
 
@@ -16,4 +28,3 @@ class Radio(Device):
 
     def set_channel(self, chanel: int):
         return self.__chanel_list[chanel]
-

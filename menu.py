@@ -17,7 +17,6 @@ class Menu:
         print('2. crear smart')
         print('3. crear radio')
         
-
     def create_device(self):
         pass
 
