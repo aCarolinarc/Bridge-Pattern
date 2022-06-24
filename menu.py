@@ -4,6 +4,7 @@ from remote import Remote
 from radio import Radio
 from tv import Tv
 from smart import Smart
+from advanceremote import Advacedremote
 
 
 class Menu:
@@ -36,18 +37,31 @@ class Menu:
         optionmenu = int(input("Porfavor coloque el numero de las opciones"))
         if optionmenu == 1:
             #  device: Device
-
-            remote = Remote()
-            self.create_device(1)
+            print("1. ANTES DE CREAR UN CONTROL, TENEMOS QUE ASIGNARLE UN DISPOSITIVO")
+            self.show_devices()
+            devices_pos = input("por favor coloque el numero del dipositivo que quiera asignar")
+            remote = Remote(self.__device_list[devices_pos])
+            self.__remote_list.append(remote)
+            print("control remoto creado")
         if optionmenu == 2:
-            self.create_device(2)
+            print("1. ANTES DE CREAR UN CONTROL, TENEMOS QUE ASIGNARLE UN DISPOSITIVO")
+            self.show_devices()
+            devices_pos = input("por favor coloque el numero del dipositivo que quiera asignar")
+            a_remote = Advacedremote(self.__device_list[devices_pos])
+            self.__remote_list.append(a_remote)
+            print("control avanzado creado")
 
     def show_devices(self):
+        x = 0
         for i in self.__device_list:
-            print()
+            print(str(x) + " -> " + str(i.get_type()))
+            x = x + 1
 
     def show_remotes(self):
-        pass
+        x = 0
+        for i in self.__remote_list:
+            print(str(x) + " -> " + i.device.get_type())
+            x = x + 1
 
     def create_device(self, option: int):
         if option == 1:
@@ -61,9 +75,7 @@ class Menu:
             print("radio creada de forma exitosa")
         if option == 3:
             tv_smart = Smart(False, 100, self.smart_apps)
-
-    def assign_device_to_remote(self):
-        pass
+            print("smart creada de forma exitosa")
 
     def create_device_menu(self):
         print('***********************************')
@@ -78,6 +90,34 @@ class Menu:
         if optionmenu == 3:
             self.create_device(3)
 
+    def real_control_device(self, option: int, remote: Remote):
+        if option == 1:
+            remote.enable()
+        if option == 2:
+            remote.disable()
+        if option == 3:
+            remote.channel_up()
+        if option == 4:
+            remote.channel_down()
+        if option == 5:
+            remote.volumen_up()
+        if option == 6:
+            remote.volumen_down()
+
+    def control_device(self):
+        print("--------------------------")
+        self.show_remotes()
+        option_control = int(input("por favor coloque el numero del control que desea usar"))
+        control_using = self.__remote_list[option_control]
+        print("1. prender el dispositivo")
+        print("2. apagar dispositivo")
+        print("3. subir de canal")
+        print("4. bajar de canal")
+        print("5. subir volumen")
+        print("6. bajar volumen")
+        do: int = int(input("porfavor elgia una opcion"))
+        self.real_control_device(do, control_using)
+
     def main_menu(self):
         option = 0
 
@@ -87,7 +127,7 @@ class Menu:
             print("2. crear un dispositivo")
             print("3. ver lista de dispositivos")
             print("4. ver lista de controles")
-            print("5. Asignar un control remoto a  un dispositivo")
+            print("5. Controlar un dispositivo")
             print("6. Salir")
             option = int(input('eliga una opcion: '))
             if option == 1:
@@ -99,4 +139,4 @@ class Menu:
             if option == 4:
                 self.show_remotes()
             if option == 5:
-                self.assign_device_to_remote()
+                self.control_device()

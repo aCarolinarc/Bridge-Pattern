@@ -26,9 +26,10 @@ class Remote(Device):
         position: int = self.device.get_channel()
         position = position - 1
         self.device.set_channel(position)
+        print(str(self.device.set_channel(position)))
 
     def channel_up(self):
         position: int = self.device.get_channel()
         position = position + 1
         self.device.set_channel(position)
-
+        print(str(self.device.set_channel(position)))
