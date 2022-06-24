@@ -34,19 +34,19 @@ class Menu:
         print('***********************************')
         print('1. crear un control normal')
         print('2. crear un control avanzado')
-        optionmenu = int(input("Porfavor coloque el numero de las opciones"))
+        optionmenu = int(input("Porfavor coloque el numero de las opciones "))
         if optionmenu == 1:
             #  device: Device
             print("1. ANTES DE CREAR UN CONTROL, TENEMOS QUE ASIGNARLE UN DISPOSITIVO")
             self.show_devices()
-            devices_pos = input("por favor coloque el numero del dipositivo que quiera asignar")
+            devices_pos = input("por favor coloque el numero del dipositivo que quiera asignar ")
             remote = Remote(self.__device_list[devices_pos])
             self.__remote_list.append(remote)
             print("control remoto creado")
         if optionmenu == 2:
             print("1. ANTES DE CREAR UN CONTROL, TENEMOS QUE ASIGNARLE UN DISPOSITIVO")
             self.show_devices()
-            devices_pos = input("por favor coloque el numero del dipositivo que quiera asignar")
+            devices_pos: int = input("por favor coloque el numero del dipositivo que quiera asignar")
             a_remote = Advacedremote(self.__device_list[devices_pos])
             self.__remote_list.append(a_remote)
             print("control avanzado creado")
@@ -55,40 +55,36 @@ class Menu:
         x = 0
         for i in self.__device_list:
             print(str(x) + " -> " + str(i.get_type()))
-            x = x + 1
+            x += 1
 
     def show_remotes(self):
+        """"""
         x = 0
         for i in self.__remote_list:
             print(str(x) + " -> " + i.device.get_type())
-            x = x + 1
+            x += 1
 
-    def create_device(self, option: int):
-        if option == 1:
+    def create_device(self):
+        """Crea el dispositivo
+        Pero surge el problema que no reconoce el 3 y guarda radio no sé si es problema solo mio """
+        print('***********************************')
+        print('1. tv')
+        print('2. radio')
+        print('3. smart tv')
+        optionmenu = int(input("Porfavor coloque el numero de las opciones "))
+        if optionmenu == 1:
             # is_enabled: bool, volume: int, chanel_list: Dict
-            tv = Tv(False, 100, self.tv_chanels)
+            tv: Device = Tv(False, 100, self.tv_chanels)
             self.__device_list.append(tv)
             print("tv creada de forma exitosa")
-        if option == 2:
-            radio = Radio(False, 100, self.radio_chanels)
+        if optionmenu == 2:
+            radio: Device = Radio(False, 100, self.radio_chanels)
             self.__device_list.append(radio)
             print("radio creada de forma exitosa")
-        if option == 3:
-            tv_smart = Smart(False, 100, self.smart_apps)
-            print("smart creada de forma exitosa")
-
-    def create_device_menu(self):
-        print('***********************************')
-        print('1. crear una tv')
-        print('2. crear una radio')
-        print('3. crear tv smart')
-        optionmenu = int(input("Porfavor coloque el numero de las opciones"))
-        if optionmenu == 1:
-            self.create_device(1)
-        if optionmenu == 2:
-            self.create_device(2)
         if optionmenu == 3:
-            self.create_device(3)
+            tv_smart: Device = Smart(False, 100, self.smart_apps)
+            self.__device_list.append(tv_smart)
+            print("smart creada de forma exitosa")
 
     def real_control_device(self, option: int, remote: Remote):
         if option == 1:

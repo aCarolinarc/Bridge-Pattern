@@ -7,7 +7,7 @@ class Smart(Device):
         self.__is_enabled: bool = False
         self.__volume: int = 100
         self.__app_list: List[str] = []
-        self.__type: str = "Radio"
+        self.__type: str = "SmartTv"
         self.__chanel: int = 0
 
     def get_type(self):

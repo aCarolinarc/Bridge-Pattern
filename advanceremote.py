@@ -14,20 +14,20 @@ class Advacedremote(Remote):
 
     def volumen_down(self):
         vol: int = self.device.get_volume()
-        vol = vol - 1
+        vol -= 1
         self.device.set_volume(vol)
 
     def volumen_up(self):
         vol: int = self.device.get_volume()
-        vol = vol + 1
+        vol += 1
         self.device.set_volume(vol)
 
     def channel_down(self):
         position: int = self.device.get_channel()
-        position = position - 1
+        position -= 1
         self.device.set_channel(position)
 
     def channel_up(self):
         position: int = self.device.get_channel()
-        position = position + 1
+        position += 1
         self.device.set_channel(position)
